@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09C644362AA9C92500562EC3 /* TCAGithubSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C644352AA9C92500562EC3 /* TCAGithubSearchTests.swift */; };
 		09CE69702AA9AE8E0015F3F1 /* TCAGithubSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE696F2AA9AE8E0015F3F1 /* TCAGithubSearchApp.swift */; };
 		09CE69722AA9AE8E0015F3F1 /* GithubSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE69712AA9AE8E0015F3F1 /* GithubSearchView.swift */; };
 		09CE69742AA9AE8F0015F3F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09CE69732AA9AE8F0015F3F1 /* Assets.xcassets */; };
@@ -18,7 +19,19 @@
 		09CE698F2AA9B35D0015F3F1 /* SearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE698E2AA9B35D0015F3F1 /* SearchClient.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		09C644372AA9C92500562EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09CE69642AA9AE8E0015F3F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09CE696B2AA9AE8E0015F3F1;
+			remoteInfo = TCAGithubSearch;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		09C644332AA9C92500562EC3 /* TCAGithubSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCAGithubSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C644352AA9C92500562EC3 /* TCAGithubSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCAGithubSearchTests.swift; sourceTree = "<group>"; };
 		09CE696C2AA9AE8E0015F3F1 /* TCAGithubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCAGithubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09CE696F2AA9AE8E0015F3F1 /* TCAGithubSearchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCAGithubSearchApp.swift; sourceTree = "<group>"; };
 		09CE69712AA9AE8E0015F3F1 /* GithubSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSearchView.swift; sourceTree = "<group>"; };
@@ -32,6 +45,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		09C644302AA9C92500562EC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		09CE69692AA9AE8E0015F3F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,10 +63,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09C644342AA9C92500562EC3 /* TCAGithubSearchTests */ = {
+			isa = PBXGroup;
+			children = (
+				09C644352AA9C92500562EC3 /* TCAGithubSearchTests.swift */,
+			);
+			path = TCAGithubSearchTests;
+			sourceTree = "<group>";
+		};
 		09CE69632AA9AE8E0015F3F1 = {
 			isa = PBXGroup;
 			children = (
 				09CE696E2AA9AE8E0015F3F1 /* TCAGithubSearch */,
+				09C644342AA9C92500562EC3 /* TCAGithubSearchTests */,
 				09CE696D2AA9AE8E0015F3F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				09CE696C2AA9AE8E0015F3F1 /* TCAGithubSearch.app */,
+				09C644332AA9C92500562EC3 /* TCAGithubSearchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,6 +164,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		09C644322AA9C92500562EC3 /* TCAGithubSearchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09C6443B2AA9C92500562EC3 /* Build configuration list for PBXNativeTarget "TCAGithubSearchTests" */;
+			buildPhases = (
+				09C6442F2AA9C92500562EC3 /* Sources */,
+				09C644302AA9C92500562EC3 /* Frameworks */,
+				09C644312AA9C92500562EC3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				09C644382AA9C92500562EC3 /* PBXTargetDependency */,
+			);
+			name = TCAGithubSearchTests;
+			productName = TCAGithubSearchTests;
+			productReference = 09C644332AA9C92500562EC3 /* TCAGithubSearchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		09CE696B2AA9AE8E0015F3F1 /* TCAGithubSearch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09CE697B2AA9AE8F0015F3F1 /* Build configuration list for PBXNativeTarget "TCAGithubSearch" */;
@@ -164,6 +212,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					09C644322AA9C92500562EC3 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 09CE696B2AA9AE8E0015F3F1;
+					};
 					09CE696B2AA9AE8E0015F3F1 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -186,11 +238,19 @@
 			projectRoot = "";
 			targets = (
 				09CE696B2AA9AE8E0015F3F1 /* TCAGithubSearch */,
+				09C644322AA9C92500562EC3 /* TCAGithubSearchTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		09C644312AA9C92500562EC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		09CE696A2AA9AE8E0015F3F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +263,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		09C6442F2AA9C92500562EC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C644362AA9C92500562EC3 /* TCAGithubSearchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		09CE69682AA9AE8E0015F3F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,7 +286,56 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		09C644382AA9C92500562EC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09CE696B2AA9AE8E0015F3F1 /* TCAGithubSearch */;
+			targetProxy = 09C644372AA9C92500562EC3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		09C644392AA9C92500562EC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7DAHNMXP5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TCAGithubSearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCAGithubSearch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TCAGithubSearch";
+			};
+			name = Debug;
+		};
+		09C6443A2AA9C92500562EC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7DAHNMXP5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TCAGithubSearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCAGithubSearch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TCAGithubSearch";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		09CE69792AA9AE8F0015F3F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -407,6 +524,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		09C6443B2AA9C92500562EC3 /* Build configuration list for PBXNativeTarget "TCAGithubSearchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09C644392AA9C92500562EC3 /* Debug */,
+				09C6443A2AA9C92500562EC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		09CE69672AA9AE8E0015F3F1 /* Build configuration list for PBXProject "TCAGithubSearch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

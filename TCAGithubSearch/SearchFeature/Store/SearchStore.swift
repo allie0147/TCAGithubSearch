@@ -10,15 +10,38 @@ import Foundation
 
 struct SearchStore: Reducer {
     struct State: Equatable {
-        // TODO: 앱은 어떤 상태들로 정의되는가?
+        @BindingState var keyword: String = ""
+        var requestCount: Int = 0
     }
 
-    enum Action: Equatable {
-        // TODO: 상태들을 변화시키는 사용자의 액션은 무엇인가?
+    enum Action: BindableAction, Equatable {
+        case binding(BindingAction<State>)
+        case search
+    }
+
+    @Dependency(\.continuousClock) var clock
+
+    private enum Debounce {
+        case SearchID
     }
 
     var body: some ReducerOf<Self> {
-        // TODO: 액션을 통해 어떤 상태를 바꿀 것인가?
-        EmptyReducer()
+        BindingReducer()
+
+        Reduce { state, action in
+            switch action {
+            case .binding(\.$keyword):
+                return .run { send in
+                    try await clock.sleep(for: .seconds(1)) // debounce를 추가한다.
+                    await send(.search)
+                }
+                .cancellable(id: Debounce.SearchID.self, cancelInFlight: true)
+            case .search:
+                state.requestCount += 1
+                return .none
+            default:
+                return .none
+            }
+        }
     }
 }

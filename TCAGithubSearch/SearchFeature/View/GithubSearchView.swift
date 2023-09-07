@@ -5,23 +5,36 @@
 //  Created by AllieKim on 2023/09/07.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct GithubSearchView: View {
+    let store: StoreOf<SearchStore>
+
     @StateObject private var viewModel: GithubSearchView.ViewModel = .init()
     @State private var keyword: String = ""
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(viewModel.results, id: \.self) {
-                    Text($0)
+        WithViewStore(self.store) { $0 } content: { viewStore in
+            NavigationView {
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Request count : \(viewStore.requestCount)")
+                            .font(.title)
+                    }
+                    .padding(.leading, 20)
+
+                    List {
+                        ForEach(viewModel.results, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .searchable(text: viewStore.$keyword)
+                    .navigationTitle("Github Search")
+                    .onSubmit(of: .search) {
+                        viewModel.searchWith(viewStore.keyword)
+                    }
                 }
-            }
-            .searchable(text: $keyword)
-            .navigationTitle("Github Search")
-            .onSubmit(of: .search) {
-                viewModel.searchWith(keyword)
             }
         }
     }
