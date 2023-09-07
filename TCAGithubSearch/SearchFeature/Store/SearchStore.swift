@@ -13,11 +13,13 @@ struct SearchStore: Reducer {
         @BindingState var keyword: String = ""
         var requestCount: Int = 0
         var searchResults: [String] = []
+        var previousKeyword: String = ""
     }
 
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case search
+        case savePreviousKeyword
 
         case searchDataLoaded(TaskResult<SearchEntity>)
     }
@@ -43,12 +45,19 @@ struct SearchStore: Reducer {
 
             case .search:
                 state.requestCount += 1
-                return .run { [keyword = state.keyword] send in
-                    let result = await TaskResult {
-                        try await searchClient.searchWith(keyword)
-                    }
-                    await send(.searchDataLoaded(result))
-                }
+                return Effect.concatenate([
+                    .run { [keyword = state.keyword] send in
+                        let result = await TaskResult {
+                            try await searchClient.searchWith(keyword)
+                        }
+                        await send(.searchDataLoaded(result))
+                    },
+                    .send(.savePreviousKeyword)
+                ])
+
+            case .savePreviousKeyword:
+                state.previousKeyword = state.keyword
+                return .none
 
             case let .searchDataLoaded(.success(searchEntity)):
                 state.searchResults = searchEntity.items.map(\.name)

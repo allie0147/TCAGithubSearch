@@ -18,6 +18,10 @@ struct GithubSearchView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Request count : \(viewStore.requestCount)")
                             .font(.title)
+                        Text("Keyword : \(viewStore.keyword)")
+                            .font(.body)
+                        Text("Previous keyword : \(viewStore.previousKeyword)")
+                            .font(.body)
                     }
                     .padding(.leading, 20)
 

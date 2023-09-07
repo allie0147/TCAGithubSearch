@@ -53,5 +53,9 @@ final class TCAGithubSearchTests: XCTestCase {
                 "SwiftterSwift"
             ]
         }
+
+        await sut.receive(.savePreviousKeyword) { newState in
+            newState.previousKeyword = "Swift"
+        }
     }
 }
