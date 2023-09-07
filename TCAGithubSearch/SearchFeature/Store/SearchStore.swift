@@ -12,14 +12,18 @@ struct SearchStore: Reducer {
     struct State: Equatable {
         @BindingState var keyword: String = ""
         var requestCount: Int = 0
+        var searchResults: [String] = []
     }
 
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case search
+
+        case searchDataLoaded(TaskResult<SearchEntity>)
     }
 
-    @Dependency(\.continuousClock) var clock
+    @Dependency(\.continuousClock) private var clock
+    @Dependency(\.searchClient) private var searchClient
 
     private enum Debounce {
         case SearchID
@@ -36,9 +40,25 @@ struct SearchStore: Reducer {
                     await send(.search)
                 }
                 .cancellable(id: Debounce.SearchID.self, cancelInFlight: true)
+
             case .search:
                 state.requestCount += 1
+                return .run { [keyword = state.keyword] send in
+                    let result = await TaskResult {
+                        try await searchClient.searchWith(keyword)
+                    }
+                    await send(.searchDataLoaded(result))
+                }
+
+            case let .searchDataLoaded(.success(searchEntity)):
+                state.searchResults = searchEntity.items.map(\.name)
                 return .none
+
+            case let .searchDataLoaded(.failure(error)):
+                state.searchResults = []
+                print(error)
+                return .none
+
             default:
                 return .none
             }

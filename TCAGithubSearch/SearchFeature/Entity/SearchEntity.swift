@@ -18,3 +18,16 @@ struct SearchEntity: Decodable, Equatable, Sendable {
         }
     }
 }
+
+// MARK: - Mock data
+
+extension SearchEntity {
+    static let mock = Self(
+        items: [
+            SearchEntity.Result(name: "Swift"),
+            SearchEntity.Result(name: "SwiftyJSON"),
+            SearchEntity.Result(name: "SwiftGuide"),
+            SearchEntity.Result(name: "SwiftterSwift")
+        ]
+    )
+}

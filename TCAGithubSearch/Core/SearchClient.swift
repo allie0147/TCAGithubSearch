@@ -5,37 +5,40 @@
 //  Created by AllieKim on 2023/09/07.
 //
 
+import ComposableArchitecture
 import Foundation
 
-final class SearchClient {
-    static let shared: SearchClient = .init()
+struct SearchClient {
+    var searchWith: @Sendable (String) async throws -> SearchEntity
+}
 
-    private init() {}
-
-    func fetchSearchResults(_ keyword: String, _ completion: @escaping ([String]) -> ()) {
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(keyword)") else {
-            return
-        }
-        URLSession.shared.dataTask(
-            with: URLRequest(url: url)
-        ) { data, response, error in
-            guard error == nil else {
-                return
-            }
-            if let data,
-               let response = response as? HTTPURLResponse,
-               response.statusCode == 200 {
-                do {
-                    let entity = try JSONDecoder().decode(SearchEntity.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(entity.items.map(\.name))
-                    }
-                } catch let err {
-                    print("Decoding Error")
-                    print(err.localizedDescription)
-                }
-            }
-        }
-        .resume()
+extension DependencyValues {
+    var searchClient: SearchClient {
+        get { self[SearchClient.self] }
+        set { self[SearchClient.self] = newValue }
     }
+}
+
+// MARK: - Live API implementation
+
+extension SearchClient: DependencyKey {
+    static let liveValue = SearchClient(
+        searchWith: { keyword in
+            guard let url = URL(string: "https://api.github.com/search/repositories?q=\(keyword)") else {
+                throw APIError.invalidURL
+            }
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return try JSONDecoder().decode(SearchEntity.self, from: data)
+        }
+    )
+}
+
+extension SearchClient: TestDependencyKey {
+    static let previewValue = Self(
+        searchWith: { _ in .mock }
+    )
+
+    static let testValue = Self(
+        searchWith: unimplemented("\(Self.self).search")
+    )
 }

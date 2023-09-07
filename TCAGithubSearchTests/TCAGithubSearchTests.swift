@@ -27,6 +27,7 @@ final class TCAGithubSearchTests: XCTestCase {
         sut = TestStore(initialState: SearchStore.State()) {
             SearchStore()
         } withDependencies: {
+            $0.searchClient = .previewValue
             $0.continuousClock = testClock
         }
     }
@@ -42,6 +43,15 @@ final class TCAGithubSearchTests: XCTestCase {
 
         await sut.receive(.search) {
             $0.requestCount += 1
+        }
+        
+        await sut.receive(.searchDataLoaded(.success(.mock))) { newState in
+            newState.searchResults = [
+                "Swift",
+                "SwiftyJSON",
+                "SwiftGuide",
+                "SwiftterSwift"
+            ]
         }
     }
 }

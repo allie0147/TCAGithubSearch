@@ -11,9 +11,6 @@ import SwiftUI
 struct GithubSearchView: View {
     let store: StoreOf<SearchStore>
 
-    @StateObject private var viewModel: GithubSearchView.ViewModel = .init()
-    @State private var keyword: String = ""
-
     var body: some View {
         WithViewStore(self.store) { $0 } content: { viewStore in
             NavigationView {
@@ -25,28 +22,13 @@ struct GithubSearchView: View {
                     .padding(.leading, 20)
 
                     List {
-                        ForEach(viewModel.results, id: \.self) {
+                        ForEach(viewStore.searchResults, id: \.self) {
                             Text($0)
                         }
                     }
                     .searchable(text: viewStore.$keyword)
                     .navigationTitle("Github Search")
-                    .onSubmit(of: .search) {
-                        viewModel.searchWith(viewStore.keyword)
-                    }
                 }
-            }
-        }
-    }
-}
-
-extension GithubSearchView {
-    class ViewModel: ObservableObject {
-        @Published var results: [String] = []
-
-        func searchWith(_ keyword: String) {
-            SearchClient.shared.fetchSearchResults(keyword) { [weak self] results in
-                self?.results = results
             }
         }
     }
